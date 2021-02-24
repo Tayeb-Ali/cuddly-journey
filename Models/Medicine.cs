@@ -36,7 +36,7 @@ namespace Saidality.Models
 
         [Column("Price")]
         [Required]
-        public Double Price { get; set; }
+        public double Price { get; set; }
 
         public DateTime CreationDateTime { get; set; }
         public DateTime? LastUpdateDateTime { get; set; }
