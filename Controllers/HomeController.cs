@@ -29,12 +29,34 @@ namespace Saidality.Controllers
             return View();
         }
 
-        public IActionResult Search()
+
+        [HttpPost]
+        [Route("/search")]
+        public string Search([FromBody] string content)
         {
-            return View();
+            return content;
         }
 
-         public IActionResult Privacy()
+        // POST: Locaton/Create
+        // To protect from overposting attacks, enable the specific properties you want to bind to.
+        // For more details, see http://go.microsoft.com/fwlink/?LinkId=317598.
+        //[HttpPost]
+        //[ValidateAntiForgeryToken]
+        //public async Task<IActionResult> Search([Bind("LocatonID,Name")] string medicine)
+        //{
+            //return medicine;
+            //if (ModelState.IsValid)
+            //{
+                 //await _auc.Medicines.Contains("")
+
+                //_auc.Add(locaton);
+                //await _auc.SaveChangesAsync();
+                //return RedirectToAction(nameof(Index));
+            //}
+           // return RedirectToAction(nameof(Index));
+        //}
+
+        public IActionResult Privacy()
         {
             return View();
         }
