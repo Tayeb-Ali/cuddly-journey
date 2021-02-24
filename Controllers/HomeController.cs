@@ -40,53 +40,17 @@ namespace Saidality.Controllers
         }
 
         [HttpPost]
-        public async Task<IActionResult> Create(string BrandName, int LocatonID)
+        public async Task<IActionResult> Search(string BrandName, int LocatonID)
         {
-            if (LocatonID == null)
+            var result = (from c in _auc.Medicines.Where(s => s.BrandName.Contains(BrandName)) select c).ToList();
+
+            if (result == null)
             {
                 return NotFound();
             }
-
-            var medicine = await _auc.Medicines
-                .FirstOrDefaultAsync(m => m.BrandName.Contains(BrandName));
-            if (medicine == null)
-            {
-                return NotFound();
-            }
-
-            return View(medicine);
+            return View(result);
         }
-
-
-        //[HttpPost]
-        //[Route("Home/search")]
-        //public IActionResult Search(string BrandName, int LocatonID)
-        //{
-        //    List<Medicine> list = new List<Medicine>();
-
-        //    using (MySqlConnection conn = GetConnection())
-        //    {
-        //        conn.Open();
-        //        MySqlCommand cmd = new MySqlCommand("select * from Medicines where MedicineID ="+ LocatonID, conn);
-
-        //        using (var reader = cmd.ExecuteReader())
-        //        {
-        //            while (reader.Read())
-        //            {
-        //                list.Add(new Medicine()
-        //                {
-        //                    MedicineID = Convert.ToInt32(reader["MedicineID"]),
-        //                    BrandName = reader["BrandName"].ToString(),
-        //                    ScientificName = reader["ScientificName"].ToString(),
-        //                    Price = Convert.ToInt32(reader["Price"]),
-        //                });
-        //            }
-        //        }
-        //    }
-        //    return View(list);
-        //}
-
-
+            
 
         public IActionResult Privacy()
         {

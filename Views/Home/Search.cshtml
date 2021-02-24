@@ -1,31 +1,66 @@
-﻿@model Saidality.Models.Medicine
+﻿@model IEnumerable<Saidality.Models.Medicine>
 
 @{
-    ViewData["Title"] = "Details";
+    ViewData["Title"] = "Index";
 }
 
-<h1>Details</h1>
+<h1>Index</h1>
 
-<div>
-    <h4>Medicine</h4>
-    <hr />
-    <dl class="row">
-        <dt class="col-sm-2">
-            @Html.DisplayNameFor(model => model.MedicineID)
-        </dt>
-        <dd class="col-sm-10">
-            @Html.DisplayFor(model => model.MedicineID)
-        </dd>
-        <dt class="col-sm-2">
-            @Html.DisplayNameFor(model => model.BrandName)
-        </dt>
-        <dd class="col-sm-10">
-            @Html.DisplayFor(model => model.BrandName)
-        </dd>
-   
-    </dl>
-</div>
-<div>
-    <a asp-action="Edit" asp-route-id="@Model.MedicineID">Edit</a> |
-    <a asp-action="Index">Back to List</a>
-</div>
+<p>
+    <a asp-action="Create">Create New</a>
+</p>
+<table class="table">
+    <thead>
+        <tr>
+            <th>
+                @Html.DisplayNameFor(model => model.BrandName)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.ScientificName)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.Type)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.Price)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.CreationDateTime)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.LastUpdateDateTime)
+            </th>
+            <th></th>
+        </tr>
+    </thead>
+    <tbody>
+        @foreach (var item in Model)
+        {
+            <tr>
+                <td>
+                    @Html.DisplayFor(modelItem => item.BrandName)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.ScientificName)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.Type)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.Price)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.CreationDateTime)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.LastUpdateDateTime)
+                </td>
+                <td>
+                    <a asp-action="Edit" asp-route-id="@item.MedicineID">Edit</a> |
+                    <a asp-action="Details" asp-route-id="@item.MedicineID">Details</a> |
+                    <a asp-action="Delete" asp-route-id="@item.MedicineID">Delete</a>
+                </td>
+            </tr>
+        }
+    </tbody>
+</table>
