@@ -56,9 +56,8 @@
                     @Html.DisplayFor(modelItem => item.LastUpdateDateTime)
                 </td>
                 <td>
-                    <a asp-action="Edit" asp-route-id="@item.MedicineID">Edit</a> |
+                    <a href="/Order">Order</a> |
                     <a asp-action="Details" asp-route-id="@item.MedicineID">Details</a> |
-                    <a asp-action="Delete" asp-route-id="@item.MedicineID">Delete</a>
                 </td>
             </tr>
         }

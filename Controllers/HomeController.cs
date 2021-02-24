@@ -18,12 +18,6 @@ namespace Saidality.Controllers
         private readonly ILogger<HomeController> _logger;
         private readonly AppDbContext _auc;
 
-        private MySqlConnection GetConnection()
-        {
-            string mySqlConnectionStr = "server=localhost;port=3306;database=PharmacyDb;user=root;password=''";
-
-            return new MySqlConnection(mySqlConnectionStr);
-        }
         public HomeController(ILogger<HomeController> logger, AppDbContext aus)
         {
             _logger = logger;
@@ -52,6 +46,11 @@ namespace Saidality.Controllers
             return View(result);
         }
             
+        
+        public IActionResult Admin()
+        {
+            return View();
+        }
 
         public IActionResult Privacy()
         {

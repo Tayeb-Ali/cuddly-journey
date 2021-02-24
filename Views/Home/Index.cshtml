@@ -3,39 +3,50 @@
 }
 
 <div class="text-center">
-    <h1 class="display-4">Welcome</h1>
+    <h1 class="display-4">
+        Welcome
+    </h1>
     <p>Find a medication, the closest to your city</p>
 
 
     <hr />
     <div class="card">
-        <div class="card-body">
-            <form asp-action="search">
-                <div class="form-group">
-
-                    <div class="form-group  col col-4">
-                       
-                        <label id="BrandName">
-                            Medicine Name</label>
-                            <input id="BrandName" name="BrandName" type="text" class="form-control" placeholder="Medicine Name">
-                    </div>
-                    <div class="form-group col col-4">
-                        <label for="LocatonID">Select State</label>
-                        @model Saidality.Models.Locaton
-                        @{
-                            ViewData["Title"] = "Index";
-                        }
-                        <select class="form-control" id="LocatonID" name="LocatonID" asp-for="LocatonID" asp-items="@(new SelectList(ViewBag.message,"LocatonID","State"))">
-                        </select>
-                    </div>
-
+        @if (User.Identity.IsAuthenticated)
+        {
+            <div class="card-body">
+                <form asp-action="search">
                     <div class="form-group">
-                        <input type="submit" value="Search" class="btn btn-primary" />
-                    </div>
 
-                </div>
+                        <div class="form-group  col col-4">
+
+                            <label id="BrandName">
+                                Medicine Name
+                            </label>
+                            <input id="BrandName" name="BrandName" type="text" class="form-control" placeholder="Medicine Name">
+                        </div>
+                        <div class="form-group col col-4">
+                            <label for="LocatonID">Select State</label>
+                            @model Saidality.Models.Locaton
+                            @{
+                                ViewData["Title"] = "Index";
+                            }
+                            <select class="form-control" id="LocatonID" name="LocatonID" asp-for="LocatonID" asp-items="@(new SelectList(ViewBag.message, "LocatonID", "State"))">
+                            </select>
+                        </div>
+
+                        <div class="form-group">
+                            <input type="submit" value="Search" class="btn btn-primary" />
+                        </div>
+
+                    </div>
                 </form>
-           
+
+            </div>
+                                }
+                                else
+                                {
+    <h1>Please login to be able to access our services</h1>
+
+                                }
         </div>
-</div>
 </div>
