@@ -4,7 +4,9 @@ using Saidality.Models;
 using System;
 using System.Collections.Generic;
 using System.Diagnostics;
+using System.IO;
 using System.Linq;
+using System.Text;
 using System.Threading.Tasks;
 
 namespace Saidality.Controllers
@@ -30,12 +32,26 @@ namespace Saidality.Controllers
         }
 
 
+        //[HttpPost]
+        //[Route("search")]
+        //public string Search([FromBody] string content)
+        //{
+        //    return content;
+        //}
+
         [HttpPost]
-        [Route("/search")]
-        public string Search([FromBody] string content)
+        [Route("Home/search")]
+        public IActionResult Index(string BrandName)
         {
-            return content;
+            return Content($"Hello {BrandName}");
         }
+        //public async Task<string> ReadStringDataManual()
+        //{
+        //    using (StreamReader reader = new StreamReader(Request.Body, Encoding.UTF8))
+        //    {
+        //        return await reader.ReadToEndAsync();
+        //    }
+        //}
 
         // POST: Locaton/Create
         // To protect from overposting attacks, enable the specific properties you want to bind to.
@@ -44,16 +60,16 @@ namespace Saidality.Controllers
         //[ValidateAntiForgeryToken]
         //public async Task<IActionResult> Search([Bind("LocatonID,Name")] string medicine)
         //{
-            //return medicine;
-            //if (ModelState.IsValid)
-            //{
-                 //await _auc.Medicines.Contains("")
+        //return medicine;
+        //if (ModelState.IsValid)
+        //{
+        //await _auc.Medicines.Contains("")
 
-                //_auc.Add(locaton);
-                //await _auc.SaveChangesAsync();
-                //return RedirectToAction(nameof(Index));
-            //}
-           // return RedirectToAction(nameof(Index));
+        //_auc.Add(locaton);
+        //await _auc.SaveChangesAsync();
+        //return RedirectToAction(nameof(Index));
+        //}
+        // return RedirectToAction(nameof(Index));
         //}
 
         public IActionResult Privacy()
