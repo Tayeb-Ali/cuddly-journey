@@ -16,14 +16,17 @@ namespace Saidality.Models
         [Required]
         public int MedicineID { get; set; }
 
+
         [Column("BrandName")]
         [Required]
+        [Display(Name = "Brand Name")]
         [StringLength(100)]
         public string BrandName { get; set; }
 
         [Column("ScientificName")]
         [Required]
         [StringLength(100)]
+        [Display(Name = "Scientific Name")]
         public string ScientificName { get; set; }
 
         [Column("Type")]

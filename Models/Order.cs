@@ -7,19 +7,14 @@ using System.Threading.Tasks;
 
 namespace Saidality.Models
 {
-    [Table("Stocks")]
-    public class Stock
+    [Table("Orders")]
+    public class Order
     {
-        [Column("StockID")]
+        [Column("OrderID")]
         [Key]
         [DatabaseGenerated(DatabaseGeneratedOption.Identity)]
         [Required]
-        public int StockID { get; set; }
-
-        [Column("Name")]
-        [Required]
-        [StringLength(100)]
-        public string Name { get; set; }
+        public int OrderID { get; set; }
 
         [ForeignKey("Pharmcy")]
         public int PharmacyId { get; set; }
@@ -27,16 +22,24 @@ namespace Saidality.Models
         [ForeignKey("Mediciene")]
         public int MedicieneId { get; set; }
 
-        [Column("Quantity")]
-        public int Quantity { get; set; }
+        [ForeignKey("Person")]
+        public int PersonId { get; set; }
 
+        [ForeignKey("Location")]
+        public int Location { get; set; }
+
+        [Column("Price")]
+        public Double Price { get; set; }
 
         public DateTime CreationDateTime { get; set; }
         public DateTime? LastUpdateDateTime { get; set; }
 
-
         public Pharmcy Pharmcy { get; set; }
 
         public Medicine Mediciene { get; set; }
+
+        public Person Person { get; set; }
+
+        public Locaton Locaton { get; set; }
     }
 }

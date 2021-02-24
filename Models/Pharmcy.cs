@@ -37,5 +37,8 @@ namespace Saidality.Models
 
         public List<Stock> Stocks { get; set; }
 
+
     }
+
+
 }
