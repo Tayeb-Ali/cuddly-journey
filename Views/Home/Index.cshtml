@@ -13,5 +13,22 @@
 
     <h1>Binding data into Dropdown list</h1>
     <hr />
-    <select asp-for="LocatonID" asp-items="@(new SelectList(ViewBag.message,"LocatonID","State"))"></select>
+    <div class="card">
+        <div class="card-body">
+
+
+            <div class="form-group">
+                <label for="Medicine">Medicine Name</label>
+                <input type="text" class="form-control" id="Medicine" placeholder="Medicine Name">
+            </div>
+            <div class="form-group">
+                <label for="exampleFormControlSelect1">Example select</label>
+                <select class="form-control" id="exampleFormControlSelect1" asp-for="LocatonID" asp-items="@(new SelectList(ViewBag.message,"LocatonID","State"))">
+                </select>
+            </div>
+
+            <button type="button" class="btn btn-primary">Search</button>
+
+        </div>
+    </div>
 </div>
