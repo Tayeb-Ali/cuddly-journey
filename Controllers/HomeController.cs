@@ -1,5 +1,7 @@
 ﻿using Microsoft.AspNetCore.Mvc;
+using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.Logging;
+using MySql.Data.MySqlClient;
 using Saidality.Models;
 using System;
 using System.Collections.Generic;
@@ -16,6 +18,12 @@ namespace Saidality.Controllers
         private readonly ILogger<HomeController> _logger;
         private readonly AppDbContext _auc;
 
+        private MySqlConnection GetConnection()
+        {
+            string mySqlConnectionStr = "server=localhost;port=3306;database=PharmacyDb;user=root;password=''";
+
+            return new MySqlConnection(mySqlConnectionStr);
+        }
         public HomeController(ILogger<HomeController> logger, AppDbContext aus)
         {
             _logger = logger;
@@ -31,46 +39,54 @@ namespace Saidality.Controllers
             return View();
         }
 
-
-        //[HttpPost]
-        //[Route("search")]
-        //public string Search([FromBody] string content)
-        //{
-        //    return content;
-        //}
-
         [HttpPost]
-        [Route("Home/search")]
-        public IActionResult Index(string BrandName)
+        public async Task<IActionResult> Create(string BrandName, int LocatonID)
         {
-            return Content($"Hello {BrandName}");
+            if (LocatonID == null)
+            {
+                return NotFound();
+            }
+
+            var medicine = await _auc.Medicines
+                .FirstOrDefaultAsync(m => m.BrandName.Contains(BrandName));
+            if (medicine == null)
+            {
+                return NotFound();
+            }
+
+            return View(medicine);
         }
-        //public async Task<string> ReadStringDataManual()
-        //{
-        //    using (StreamReader reader = new StreamReader(Request.Body, Encoding.UTF8))
-        //    {
-        //        return await reader.ReadToEndAsync();
-        //    }
-        //}
 
-        // POST: Locaton/Create
-        // To protect from overposting attacks, enable the specific properties you want to bind to.
-        // For more details, see http://go.microsoft.com/fwlink/?LinkId=317598.
+
         //[HttpPost]
-        //[ValidateAntiForgeryToken]
-        //public async Task<IActionResult> Search([Bind("LocatonID,Name")] string medicine)
+        //[Route("Home/search")]
+        //public IActionResult Search(string BrandName, int LocatonID)
         //{
-        //return medicine;
-        //if (ModelState.IsValid)
-        //{
-        //await _auc.Medicines.Contains("")
+        //    List<Medicine> list = new List<Medicine>();
 
-        //_auc.Add(locaton);
-        //await _auc.SaveChangesAsync();
-        //return RedirectToAction(nameof(Index));
+        //    using (MySqlConnection conn = GetConnection())
+        //    {
+        //        conn.Open();
+        //        MySqlCommand cmd = new MySqlCommand("select * from Medicines where MedicineID ="+ LocatonID, conn);
+
+        //        using (var reader = cmd.ExecuteReader())
+        //        {
+        //            while (reader.Read())
+        //            {
+        //                list.Add(new Medicine()
+        //                {
+        //                    MedicineID = Convert.ToInt32(reader["MedicineID"]),
+        //                    BrandName = reader["BrandName"].ToString(),
+        //                    ScientificName = reader["ScientificName"].ToString(),
+        //                    Price = Convert.ToInt32(reader["Price"]),
+        //                });
+        //            }
+        //        }
+        //    }
+        //    return View(list);
         //}
-        // return RedirectToAction(nameof(Index));
-        //}
+
+
 
         public IActionResult Privacy()
         {
