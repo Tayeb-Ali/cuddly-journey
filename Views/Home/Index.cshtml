@@ -11,24 +11,25 @@
         ViewData["Title"] = "Index";
     }
 
-    <h1>Binding data into Dropdown list</h1>
     <hr />
     <div class="card">
         <div class="card-body">
-            <form>
+            <form asp-action="search">
                 <div class="form-group">
 
-                    <div class="form-control col col-md-4">
+                    <div class="form-group  col col-4">
                         <label for="Medicine">Medicine Name</label>
                         <input type="text" class="form-control" id="Medicine" placeholder="Medicine Name">
                     </div>
-                    <div class="form-control col col-md-4">
+                    <div class="form-group col col-4">
                         <label for="state">Select State</label>
                         <select class="form-control" id="state" asp-for="LocatonID" asp-items="@(new SelectList(ViewBag.message,"LocatonID","State"))">
                         </select>
                     </div>
 
-                    <button type="button" class="btn btn-primary">Search</button>
+                    <div class="form-group">
+                        <input type="submit" value="Search" class="btn btn-primary" />
+                    </div>
 
                 </div>
                 </form>
