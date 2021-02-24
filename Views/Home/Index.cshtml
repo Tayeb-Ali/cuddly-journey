@@ -4,5 +4,14 @@
 
 <div class="text-center">
     <h1 class="display-4">Welcome</h1>
-    <p>Learn about <a href="https://docs.microsoft.com/aspnet/core">building Web apps with ASP.NET Core</a>.</p>
+    <p>Find a medication, the closest to your city</p>
+
+    @model Saidality.Models.Locaton
+    @{
+        ViewData["Title"] = "Index";
+    }
+
+    <h1>Binding data into Dropdown list</h1>
+    <hr />
+    <select asp-for="LocatonID" asp-items="@(new SelectList(ViewBag.message,"LocatonID","State"))"></select>
 </div>
