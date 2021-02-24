@@ -42,7 +42,8 @@ namespace Saidality.Controllers
         [HttpPost]
         public async Task<IActionResult> Search(string BrandName, int LocatonID)
         {
-            var result = (from c in _auc.Medicines.Where(s => s.BrandName.Contains(BrandName)) select c).ToList();
+            var result = (from c in _auc.Medicines.Where(
+                s => s.BrandName.Contains(BrandName)|| s.ScientificName.Contains(BrandName)) select c).ToList();
 
             if (result == null)
             {
