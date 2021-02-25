@@ -8,6 +8,9 @@ namespace Saidality.ViewModel
 {
     public class HomeViewModel
     {
-        public List<Medicine> GetMedicines { get; set; }
+        //public List<Medicine> GetMedicines { get; set; }
+        public IEnumerable<Medicine> Medicines { get; set; }
+
+       
     }
 }

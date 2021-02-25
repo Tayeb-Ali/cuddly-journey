@@ -1,14 +1,11 @@
 ﻿using Microsoft.AspNetCore.Mvc;
-using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.Logging;
-using MySql.Data.MySqlClient;
 using Saidality.Models;
+using Saidality.ViewModel;
 using System;
 using System.Collections.Generic;
 using System.Diagnostics;
-using System.IO;
 using System.Linq;
-using System.Text;
 using System.Threading.Tasks;
 
 namespace Saidality.Controllers
@@ -40,29 +37,41 @@ namespace Saidality.Controllers
             //    s => s.BrandName.Contains(BrandName) || s.ScientificName.Contains(BrandName))
             //              select c).ToList();
 
-            var result = (from ep in _auc.Stocks
-                          join e in _auc.Locaton on ep.StockID equals e.LocatonID
-                          join me in _auc.Medicines on ep.StockID equals me.MedicineID
-                          join ph in _auc.Pharmcies on ep.StockID equals ph.PharmcyID
-                          where e.LocatonID == LocatonID && ep.Mediciene.BrandName.Contains(BrandName) || ep.Mediciene.ScientificName.Contains(BrandName)
+            var result = (from stok in _auc.Stocks
+                          join med in _auc.Pharmcies on stok.PharmacyId equals med.PharmcyID
+                          join loc in _auc.Locaton on med.LocatonID equals loc.LocatonID
+                          where stok.Mediciene.BrandName.Contains(BrandName) || stok.Mediciene.ScientificName.Contains(BrandName) && stok.Pharmcy.LocatonID == LocatonID
                           select new
                           {
-                              //MedicineID = ep.Mediciene.MedicineID,
-                              //BrandName = ep.Mediciene.BrandName,
-                              //ScientificName = ep.Mediciene.ScientificName,
-                              //Type = ep.Mediciene.Type,
-                              ep.Mediciene,
-                              
-                              //pharmcies = ep.Pharmcy,
-                              //State = e.State,
-                          }).ToList();
-            return Ok(result);
+                              stok.Pharmcy
+                          }
+                          );
 
+            //var result = (from ep in _auc.Pharmcies
+            //              join medic in _auc.Locaton on ep.Locaton.LocatonID equals medic.LocatonID
+            //              //join e in _auc.Locaton on ep. equals e.LocatonID
+            //              //join me in _auc.Medicines on ep. equals me.MedicineID
+            //              //join ph in _auc.Pharmcies on ep.StockID equals ph.PharmcyID
+            //              where ep.LocatonID == LocatonID && medic..BrandName.Contains(BrandName) || ep.Mediciene.ScientificName.Contains(BrandName)
+            //              select new
+            //              {
+            //                  //MedicineID = ep.Mediciene.MedicineID,
+            //                  //BrandName = ep.Mediciene.BrandName,
+            //                  //ScientificName = ep.Mediciene.ScientificName,
+            //                  //Type = ep.Mediciene.Type,
+            //                  ep.Mediciene,
+            //                  pharmcies = ep.Pharmcy,
+            //                  //State = e.State,
+            //              });
+            return Ok(result);
+            //ViewBag.medicien = result;
             if (result == null)
             {
                 return NotFound();
             }
-            return View(result);
+            var viewModel = new HomeViewModel();
+            viewModel.Medicines = (IEnumerable<Medicine>)result;
+            return View(viewModel);
         }
             
         
