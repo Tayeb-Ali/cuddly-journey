@@ -33,22 +33,11 @@ namespace Saidality.Controllers
         [HttpPost]
         public async Task<IActionResult> Search(string BrandName, int LocatonID)
         {
-            //var result = (from c in _auc.Medicines.Where(
-            //    s => s.BrandName.Contains(BrandName) || s.ScientificName.Contains(BrandName))
-            //              select c).ToList();
+            var result = (from c in _auc.Stocks.Where(
+                s => s.Mediciene.BrandName.Contains(BrandName) || s.Mediciene.ScientificName.Contains(BrandName))
+                          select c).ToList();
 
-            var result = (from stok in _auc.Stocks
-                          join med in _auc.Pharmcies on stok.PharmacyId equals med.PharmcyID
-                          join loc in _auc.Locaton on med.LocatonID equals loc.LocatonID
-                          where stok.Mediciene.BrandName.Contains(BrandName) || stok.Mediciene.ScientificName.Contains(BrandName) && stok.Pharmcy.LocatonID == LocatonID
-
-                          select stok.Mediciene);
-
-            //Pharmcy= stok.Pharmcy,
-            //Locaton = stok.Pharmcy.Locaton,
-            //var result = (from stok in _auc.Stocks
-            return Ok(result.ToList());
-            //ViewBag.medicien = result;
+            //return Ok(result.ToList());
             if (result == null)
             {
                 return NotFound();
@@ -57,9 +46,9 @@ namespace Saidality.Controllers
             //    Mediciene = result.ToList(),
             //    Pharmcy = result.ToList()
             //};
-             
+
             //viewModel.Medicines = (IEnumerable<Medicine>)result;
-            //return View(viewModel);
+            return View(result);
         }
             
         

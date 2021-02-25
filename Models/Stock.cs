@@ -10,6 +10,11 @@ namespace Saidality.Models
     [Table("Stocks")]
     public class Stock
     {
+        public Stock()
+        {
+            Pharmcy = new Pharmcy();
+            Mediciene = new Medicine();
+        }
         [Column("StockID")]
         [Key]
         [DatabaseGenerated(DatabaseGeneratedOption.Identity)]

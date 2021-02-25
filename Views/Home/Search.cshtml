@@ -1,4 +1,6 @@
-﻿@model HomeViewModel
+﻿@*@model HomeViewModel*@
+@model IEnumerable<Saidality.Models.Stock>
+
 
 @{
     ViewData["Title"] = "Index";
@@ -22,6 +24,9 @@
                 Type
             </th>
             <th>
+                Pharmcy
+            </th>
+            <th>
                 Price
             </th>
             <th>
@@ -34,26 +39,30 @@
         </tr>
     </thead>
     <tbody>
-        @foreach (var item in Model.Mediciene)
+        @foreach (var item in Model)
         {
             <tr>
                 <td>
-                    @item.BrandName
+                    @Html.DisplayNameFor(model => model.Mediciene.BrandName)
                 </td>
                 <td>
-                   @item.ScientificName
+                    @Html.DisplayNameFor(model => model.Mediciene.ScientificName)
                 </td>
                 <td>
-                   @item.Type
+                    @Html.DisplayNameFor(model => model.Mediciene.Type)
                 </td>
                 <td>
-                    @item.Price
+                    @Html.DisplayNameFor(model => model.Pharmcy.Name): Locaton-@Html.DisplayNameFor(model => model.Pharmcy.Locaton.State)
+
                 </td>
                 <td>
-                    @item.CreationDateTime
+                    @Html.DisplayNameFor(model => model.Mediciene.Price)
                 </td>
                 <td>
-                    @item.LastUpdateDateTime
+                    @Html.DisplayNameFor(model => model.Mediciene.CreationDateTime)
+                </td>
+                <td>
+                    @Html.DisplayNameFor(model => model.Mediciene.LastUpdateDateTime)
                 </td>
                 <td>
                     <a href="/Order">Order</a> |
