@@ -17,16 +17,20 @@ namespace Saidality.Models
         public int OrderID { get; set; }
 
         [ForeignKey("Pharmcy")]
+        [Display(Name = "Select Pharamcy")]
         public int PharmacyId { get; set; }
 
         [ForeignKey("Mediciene")]
+        [Display(Name = "Selsct Mediciene")]
         public int MedicieneId { get; set; }
 
         [ForeignKey("Person")]
+        [Display(Name = "Person Name")]
         public int PersonId { get; set; }
 
         [ForeignKey("Location")]
-        public int Location { get; set; }
+        [Display(Name ="Locaton")]
+        public int LocatonID { get; set; }
 
         [Column("Price")]
         public double Price { get; set; }

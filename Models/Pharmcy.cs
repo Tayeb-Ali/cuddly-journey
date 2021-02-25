@@ -27,6 +27,7 @@ namespace Saidality.Models
         public string Name { get; set; }
 
         [ForeignKey("LocatonID")]
+        [Display(Name = "Select Locaton")]
         public int LocatonID { get; set; }
 
 

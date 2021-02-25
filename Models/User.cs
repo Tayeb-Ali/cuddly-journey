@@ -15,11 +15,11 @@ namespace Saidality.Models
             Persons = new List<Person>();
         }
 
-        [Column("UserID")]
+        [Column("ID")]
         [Key]
         //[DatabaseGenerated(DatabaseGeneratedOption.Identity)]
         //[Required]
-        public int UserID { get; set; }
+        public string ID { get; set; }
 
         [EmailAddress]
         public string Email { get; set; }
