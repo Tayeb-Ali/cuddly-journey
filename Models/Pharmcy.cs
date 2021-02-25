@@ -2,8 +2,6 @@
 using System.Collections.Generic;
 using System.ComponentModel.DataAnnotations;
 using System.ComponentModel.DataAnnotations.Schema;
-using System.Linq;
-using System.Threading.Tasks;
 
 namespace Saidality.Models
 {
@@ -13,6 +11,7 @@ namespace Saidality.Models
         public Pharmcy()
         {
             Stocks = new List<Stock>();
+            Medicines = new List<Medicine>();
         }
 
         [Column("PharmcyID")]
@@ -30,18 +29,11 @@ namespace Saidality.Models
         [Display(Name = "Select Locaton")]
         public int LocatonID { get; set; }
 
-
-        //[Column("Location")]
-        //[Required]
-        //[StringLength(100)]
-        //public string Location { get; set; }
-
-
         public DateTime CreationDateTime { get; set; }
         public DateTime? LastUpdateDateTime { get; set; }
 
         public List<Stock> Stocks { get; set; }
-
+        public List<Medicine> Medicines { get; set; }
         public Locaton Locaton { get; set; }
 
 

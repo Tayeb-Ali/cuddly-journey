@@ -41,37 +41,25 @@ namespace Saidality.Controllers
                           join med in _auc.Pharmcies on stok.PharmacyId equals med.PharmcyID
                           join loc in _auc.Locaton on med.LocatonID equals loc.LocatonID
                           where stok.Mediciene.BrandName.Contains(BrandName) || stok.Mediciene.ScientificName.Contains(BrandName) && stok.Pharmcy.LocatonID == LocatonID
-                          select new
-                          {
-                              stok.Pharmcy
-                          }
-                          );
 
-            //var result = (from ep in _auc.Pharmcies
-            //              join medic in _auc.Locaton on ep.Locaton.LocatonID equals medic.LocatonID
-            //              //join e in _auc.Locaton on ep. equals e.LocatonID
-            //              //join me in _auc.Medicines on ep. equals me.MedicineID
-            //              //join ph in _auc.Pharmcies on ep.StockID equals ph.PharmcyID
-            //              where ep.LocatonID == LocatonID && medic..BrandName.Contains(BrandName) || ep.Mediciene.ScientificName.Contains(BrandName)
-            //              select new
-            //              {
-            //                  //MedicineID = ep.Mediciene.MedicineID,
-            //                  //BrandName = ep.Mediciene.BrandName,
-            //                  //ScientificName = ep.Mediciene.ScientificName,
-            //                  //Type = ep.Mediciene.Type,
-            //                  ep.Mediciene,
-            //                  pharmcies = ep.Pharmcy,
-            //                  //State = e.State,
-            //              });
-            return Ok(result);
+                          select stok.Mediciene);
+
+            //Pharmcy= stok.Pharmcy,
+            //Locaton = stok.Pharmcy.Locaton,
+            //var result = (from stok in _auc.Stocks
+            return Ok(result.ToList());
             //ViewBag.medicien = result;
             if (result == null)
             {
                 return NotFound();
             }
-            var viewModel = new HomeViewModel();
-            viewModel.Medicines = (IEnumerable<Medicine>)result;
-            return View(viewModel);
+            //var viewModel = new HomeViewModel {
+            //    Mediciene = result.ToList(),
+            //    Pharmcy = result.ToList()
+            //};
+             
+            //viewModel.Medicines = (IEnumerable<Medicine>)result;
+            //return View(viewModel);
         }
             
         

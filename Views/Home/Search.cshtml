@@ -1,4 +1,4 @@
-﻿@model IEnumerable<Saidality.Models.Medicine>
+﻿@model HomeViewModel
 
 @{
     ViewData["Title"] = "Index";
@@ -13,51 +13,51 @@
     <thead>
         <tr>
             <th>
-                @Html.DisplayNameFor(model => model.BrandName)
+                BrandName
             </th>
             <th>
-                @Html.DisplayNameFor(model => model.ScientificName)
+                ScientificName
             </th>
             <th>
-                @Html.DisplayNameFor(model => model.Type)
+                Type
             </th>
             <th>
-                @Html.DisplayNameFor(model => model.Price)
+                Price
             </th>
             <th>
-                @Html.DisplayNameFor(model => model.CreationDateTime)
+                CreationDateTime
             </th>
             <th>
-                @Html.DisplayNameFor(model => model.LastUpdateDateTime)
+                LastUpdateDateTime
             </th>
             <th></th>
         </tr>
     </thead>
     <tbody>
-        @foreach (var item in Model)
+        @foreach (var item in Model.Mediciene)
         {
             <tr>
                 <td>
-                    @Html.DisplayFor(modelItem => item.BrandName)
+                    @item.BrandName
                 </td>
                 <td>
-                    @Html.DisplayFor(modelItem => item.ScientificName)
+                   @item.ScientificName
                 </td>
                 <td>
-                    @Html.DisplayFor(modelItem => item.Type)
+                   @item.Type
                 </td>
                 <td>
-                    @Html.DisplayFor(modelItem => item.Price)
+                    @item.Price
                 </td>
                 <td>
-                    @Html.DisplayFor(modelItem => item.CreationDateTime)
+                    @item.CreationDateTime
                 </td>
                 <td>
-                    @Html.DisplayFor(modelItem => item.LastUpdateDateTime)
+                    @item.LastUpdateDateTime
                 </td>
                 <td>
                     <a href="/Order">Order</a> |
-                    <a asp-action="Details" asp-route-id="@item.MedicineID">Details</a> |
+                    @*<a asp-action="Details" asp-route-id="@item.MedicineID">Details</a>*@ |
                 </td>
             </tr>
         }
