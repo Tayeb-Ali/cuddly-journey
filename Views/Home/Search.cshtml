@@ -24,12 +24,6 @@
             <th>
                 @Html.DisplayNameFor(model => model.Price)
             </th>
-            <th>
-                @Html.DisplayNameFor(model => model.CreationDateTime)
-            </th>
-            <th>
-                @Html.DisplayNameFor(model => model.LastUpdateDateTime)
-            </th>
             <th></th>
         </tr>
     </thead>
@@ -49,12 +43,7 @@
                 <td>
                     @Html.DisplayFor(modelItem => item.Price)
                 </td>
-                <td>
-                    @Html.DisplayFor(modelItem => item.CreationDateTime)
-                </td>
-                <td>
-                    @Html.DisplayFor(modelItem => item.LastUpdateDateTime)
-                </td>
+         
                 <td>
                     <a href="/Order">Order</a> |
                     <a asp-action="Details" asp-route-id="@item.MedicineID">Details</a> |
