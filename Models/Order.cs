@@ -29,7 +29,7 @@ namespace Saidality.Models
         public int Location { get; set; }
 
         [Column("Price")]
-        public Double Price { get; set; }
+        public double Price { get; set; }
 
         public DateTime CreationDateTime { get; set; }
         public DateTime? LastUpdateDateTime { get; set; }

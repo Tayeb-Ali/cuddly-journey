@@ -82,22 +82,6 @@ namespace Saidality.Migrations
                 });
 
             migrationBuilder.CreateTable(
-                name: "Pharmcys",
-                columns: table => new
-                {
-                    PharmcyID = table.Column<int>(type: "int", nullable: false)
-                        .Annotation("MySql:ValueGenerationStrategy", MySqlValueGenerationStrategy.IdentityColumn),
-                    Name = table.Column<string>(type: "varchar(100) CHARACTER SET utf8mb4", maxLength: 100, nullable: false),
-                    Location = table.Column<string>(type: "varchar(100) CHARACTER SET utf8mb4", maxLength: 100, nullable: false),
-                    CreationDateTime = table.Column<DateTime>(type: "datetime(6)", nullable: false),
-                    LastUpdateDateTime = table.Column<DateTime>(type: "datetime(6)", nullable: true)
-                },
-                constraints: table =>
-                {
-                    table.PrimaryKey("PK_Pharmcys", x => x.PharmcyID);
-                });
-
-            migrationBuilder.CreateTable(
                 name: "AspNetRoleClaims",
                 columns: table => new
                 {
@@ -225,33 +209,32 @@ namespace Saidality.Migrations
                 });
 
             migrationBuilder.CreateTable(
-                name: "Stocks",
+                name: "Pharmcys",
                 columns: table => new
                 {
-                    StockID = table.Column<int>(type: "int", nullable: false)
+                    PharmcyID = table.Column<int>(type: "int", nullable: false)
                         .Annotation("MySql:ValueGenerationStrategy", MySqlValueGenerationStrategy.IdentityColumn),
                     Name = table.Column<string>(type: "varchar(100) CHARACTER SET utf8mb4", maxLength: 100, nullable: false),
-                    PharmacyId = table.Column<int>(type: "int", nullable: false),
-                    MedicieneId = table.Column<int>(type: "int", nullable: false),
-                    Quantity = table.Column<int>(type: "int", nullable: false),
+                    LocatonID = table.Column<int>(type: "int", nullable: false),
                     CreationDateTime = table.Column<DateTime>(type: "datetime(6)", nullable: false),
-                    LastUpdateDateTime = table.Column<DateTime>(type: "datetime(6)", nullable: true)
+                    LastUpdateDateTime = table.Column<DateTime>(type: "datetime(6)", nullable: true),
+                    MedicineID = table.Column<int>(type: "int", nullable: true)
                 },
                 constraints: table =>
                 {
-                    table.PrimaryKey("PK_Stocks", x => x.StockID);
+                    table.PrimaryKey("PK_Pharmcys", x => x.PharmcyID);
                     table.ForeignKey(
-                        name: "FK_Stocks_Medicines_MedicieneId",
-                        column: x => x.MedicieneId,
+                        name: "FK_Pharmcys_Locatons_LocatonID",
+                        column: x => x.LocatonID,
+                        principalTable: "Locatons",
+                        principalColumn: "LocatonID",
+                        onDelete: ReferentialAction.Cascade);
+                    table.ForeignKey(
+                        name: "FK_Pharmcys_Medicines_MedicineID",
+                        column: x => x.MedicineID,
                         principalTable: "Medicines",
                         principalColumn: "MedicineID",
-                        onDelete: ReferentialAction.Cascade);
-                    table.ForeignKey(
-                        name: "FK_Stocks_Pharmcys_PharmacyId",
-                        column: x => x.PharmacyId,
-                        principalTable: "Pharmcys",
-                        principalColumn: "PharmcyID",
-                        onDelete: ReferentialAction.Cascade);
+                        onDelete: ReferentialAction.Restrict);
                 });
 
             migrationBuilder.CreateTable(
@@ -292,6 +275,36 @@ namespace Saidality.Migrations
                         onDelete: ReferentialAction.Cascade);
                     table.ForeignKey(
                         name: "FK_Orders_Pharmcys_PharmacyId",
+                        column: x => x.PharmacyId,
+                        principalTable: "Pharmcys",
+                        principalColumn: "PharmcyID",
+                        onDelete: ReferentialAction.Cascade);
+                });
+
+            migrationBuilder.CreateTable(
+                name: "Stocks",
+                columns: table => new
+                {
+                    StockID = table.Column<int>(type: "int", nullable: false)
+                        .Annotation("MySql:ValueGenerationStrategy", MySqlValueGenerationStrategy.IdentityColumn),
+                    Name = table.Column<string>(type: "varchar(100) CHARACTER SET utf8mb4", maxLength: 100, nullable: false),
+                    PharmacyId = table.Column<int>(type: "int", nullable: false),
+                    MedicieneId = table.Column<int>(type: "int", nullable: false),
+                    Quantity = table.Column<int>(type: "int", nullable: false),
+                    CreationDateTime = table.Column<DateTime>(type: "datetime(6)", nullable: false),
+                    LastUpdateDateTime = table.Column<DateTime>(type: "datetime(6)", nullable: true)
+                },
+                constraints: table =>
+                {
+                    table.PrimaryKey("PK_Stocks", x => x.StockID);
+                    table.ForeignKey(
+                        name: "FK_Stocks_Medicines_MedicieneId",
+                        column: x => x.MedicieneId,
+                        principalTable: "Medicines",
+                        principalColumn: "MedicineID",
+                        onDelete: ReferentialAction.Cascade);
+                    table.ForeignKey(
+                        name: "FK_Stocks_Pharmcys_PharmacyId",
                         column: x => x.PharmacyId,
                         principalTable: "Pharmcys",
                         principalColumn: "PharmcyID",
@@ -361,6 +374,16 @@ namespace Saidality.Migrations
                 column: "LocatonId");
 
             migrationBuilder.CreateIndex(
+                name: "IX_Pharmcys_LocatonID",
+                table: "Pharmcys",
+                column: "LocatonID");
+
+            migrationBuilder.CreateIndex(
+                name: "IX_Pharmcys_MedicineID",
+                table: "Pharmcys",
+                column: "MedicineID");
+
+            migrationBuilder.CreateIndex(
                 name: "IX_Stocks_MedicieneId",
                 table: "Stocks",
                 column: "MedicieneId");
@@ -404,13 +427,13 @@ namespace Saidality.Migrations
                 name: "Persons");
 
             migrationBuilder.DropTable(
-                name: "Medicines");
-
-            migrationBuilder.DropTable(
                 name: "Pharmcys");
 
             migrationBuilder.DropTable(
                 name: "Locatons");
+
+            migrationBuilder.DropTable(
+                name: "Medicines");
         }
     }
 }

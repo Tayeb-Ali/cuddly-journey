@@ -16,13 +16,13 @@
                 @Html.DisplayNameFor(model => model.Name)
             </th>
             <th>
-                @Html.DisplayNameFor(model => model.Location)
-            </th>
-            <th>
                 @Html.DisplayNameFor(model => model.CreationDateTime)
             </th>
             <th>
                 @Html.DisplayNameFor(model => model.LastUpdateDateTime)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.Locaton)
             </th>
             <th></th>
         </tr>
@@ -34,13 +34,13 @@
                 @Html.DisplayFor(modelItem => item.Name)
             </td>
             <td>
-                @Html.DisplayFor(modelItem => item.Location)
-            </td>
-            <td>
                 @Html.DisplayFor(modelItem => item.CreationDateTime)
             </td>
             <td>
                 @Html.DisplayFor(modelItem => item.LastUpdateDateTime)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.Locaton.Country)
             </td>
             <td>
                 <a asp-action="Edit" asp-route-id="@item.PharmcyID">Edit</a> |

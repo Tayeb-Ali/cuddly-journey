@@ -25,17 +25,23 @@ namespace Saidality.Models
         [Required]
         [StringLength(100)]
         public string Name { get; set; }
-        
-        [Column("Location")]
-        [Required]
-        [StringLength(100)]
-        public string Location { get; set; }
+
+        [ForeignKey("LocatonID")]
+        public int LocatonID { get; set; }
+
+
+        //[Column("Location")]
+        //[Required]
+        //[StringLength(100)]
+        //public string Location { get; set; }
 
 
         public DateTime CreationDateTime { get; set; }
         public DateTime? LastUpdateDateTime { get; set; }
 
         public List<Stock> Stocks { get; set; }
+
+        public Locaton Locaton { get; set; }
 
 
     }

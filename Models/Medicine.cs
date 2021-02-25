@@ -10,6 +10,12 @@ namespace Saidality.Models
     [Table("Medicines")]
     public class Medicine
     {
+        public Medicine()
+        {
+            Pharmcies = new List<Pharmcy>();
+            Orders = new List<Order>();
+        }
+
         [Column("MedicineID")]
         [Key]
         [DatabaseGenerated(DatabaseGeneratedOption.Identity)]
@@ -41,6 +47,9 @@ namespace Saidality.Models
         public DateTime CreationDateTime { get; set; }
         public DateTime? LastUpdateDateTime { get; set; }
 
+        public List<Pharmcy> Pharmcies { get; set; }
+
+        public List<Order> Orders { get; set; }
 
     }
 }

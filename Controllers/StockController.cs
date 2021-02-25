@@ -49,7 +49,7 @@ namespace Saidality.Controllers
         public IActionResult Create()
         {
             ViewData["MedicieneId"] = new SelectList(_context.Medicines, "MedicineID", "BrandName");
-            ViewData["PharmacyId"] = new SelectList(_context.Pharmcies, "PharmcyID", "Location");
+            ViewData["PharmacyId"] = new SelectList(_context.Pharmcies, "PharmcyID", "Name");
             return View();
         }
 
@@ -58,7 +58,7 @@ namespace Saidality.Controllers
         // For more details, see http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public async Task<IActionResult> Create([Bind("StockID,Name,PharmacyId,MedicieneId,CreationDateTime,LastUpdateDateTime")] Stock stock)
+        public async Task<IActionResult> Create([Bind("StockID,Name,PharmacyId,MedicieneId,Quantity,CreationDateTime,LastUpdateDateTime")] Stock stock)
         {
             if (ModelState.IsValid)
             {
@@ -67,7 +67,7 @@ namespace Saidality.Controllers
                 return RedirectToAction(nameof(Index));
             }
             ViewData["MedicieneId"] = new SelectList(_context.Medicines, "MedicineID", "BrandName", stock.MedicieneId);
-            ViewData["PharmacyId"] = new SelectList(_context.Pharmcies, "PharmcyID", "Location", stock.PharmacyId);
+            ViewData["PharmacyId"] = new SelectList(_context.Pharmcies, "PharmcyID", "Name", stock.PharmacyId);
             return View(stock);
         }
 
@@ -85,7 +85,7 @@ namespace Saidality.Controllers
                 return NotFound();
             }
             ViewData["MedicieneId"] = new SelectList(_context.Medicines, "MedicineID", "BrandName", stock.MedicieneId);
-            ViewData["PharmacyId"] = new SelectList(_context.Pharmcies, "PharmcyID", "Location", stock.PharmacyId);
+            ViewData["PharmacyId"] = new SelectList(_context.Pharmcies, "PharmcyID", "Name", stock.PharmacyId);
             return View(stock);
         }
 
@@ -94,7 +94,7 @@ namespace Saidality.Controllers
         // For more details, see http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public async Task<IActionResult> Edit(int id, [Bind("StockID,Name,PharmacyId,MedicieneId,CreationDateTime,LastUpdateDateTime")] Stock stock)
+        public async Task<IActionResult> Edit(int id, [Bind("StockID,Name,PharmacyId,MedicieneId,Quantity,CreationDateTime,LastUpdateDateTime")] Stock stock)
         {
             if (id != stock.StockID)
             {
@@ -122,7 +122,7 @@ namespace Saidality.Controllers
                 return RedirectToAction(nameof(Index));
             }
             ViewData["MedicieneId"] = new SelectList(_context.Medicines, "MedicineID", "BrandName", stock.MedicieneId);
-            ViewData["PharmacyId"] = new SelectList(_context.Pharmcies, "PharmcyID", "Location", stock.PharmacyId);
+            ViewData["PharmacyId"] = new SelectList(_context.Pharmcies, "PharmcyID", "Name", stock.PharmacyId);
             return View(stock);
         }
 

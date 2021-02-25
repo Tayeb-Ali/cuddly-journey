@@ -19,9 +19,9 @@
                 <span asp-validation-for="Name" class="text-danger"></span>
             </div>
             <div class="form-group">
-                <label asp-for="Location" class="control-label"></label>
-                <input asp-for="Location" class="form-control" />
-                <span asp-validation-for="Location" class="text-danger"></span>
+                <label asp-for="LocatonID" class="control-label"></label>
+                <select asp-for="LocatonID" class="form-control" asp-items="ViewBag.LocatonID"></select>
+                <span asp-validation-for="LocatonID" class="text-danger"></span>
             </div>
             <div class="form-group">
                 <label asp-for="CreationDateTime" class="control-label"></label>

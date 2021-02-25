@@ -13,6 +13,7 @@ namespace Saidality.Models
         public Locaton()
         {
             Orders = new List<Order>();
+            Persons = new List<Person>();
         }
 
 
@@ -46,5 +47,6 @@ namespace Saidality.Models
         public string HomeNumber { get; set; }
 
         public List<Order> Orders { get; set; }
+        public List<Person> Persons { get; set; }
     }
 }

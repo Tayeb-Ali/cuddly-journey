@@ -39,6 +39,18 @@ namespace Saidality.Controllers
             var result = (from c in _auc.Medicines.Where(
                 s => s.BrandName.Contains(BrandName)|| s.ScientificName.Contains(BrandName)) select c).ToList();
 
+            //var entryPoint = (from ep in _auc.Locaton
+            //                  join e in _auc.Medicines on ep.LocatonID equals e.MedicineID
+            //                  where e.OwnerID == user.UID
+            //                  select new
+            //                  {
+            //                      UID = e.OwnerID,
+            //                      TID = e.TID,
+            //                      Title = t.Title,
+            //                      EID = e.EID
+            //                  }).Take(10);
+
+
             if (result == null)
             {
                 return NotFound();

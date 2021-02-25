@@ -21,7 +21,8 @@ namespace Saidality.Controllers
         // GET: Pharmcy
         public async Task<IActionResult> Index()
         {
-            return View(await _context.Pharmcies.ToListAsync());
+            var appDbContext = _context.Pharmcies.Include(p => p.Locaton);
+            return View(await appDbContext.ToListAsync());
         }
 
         // GET: Pharmcy/Details/5
@@ -33,6 +34,7 @@ namespace Saidality.Controllers
             }
 
             var pharmcy = await _context.Pharmcies
+                .Include(p => p.Locaton)
                 .FirstOrDefaultAsync(m => m.PharmcyID == id);
             if (pharmcy == null)
             {
@@ -45,6 +47,7 @@ namespace Saidality.Controllers
         // GET: Pharmcy/Create
         public IActionResult Create()
         {
+            ViewData["LocatonID"] = new SelectList(_context.Locaton, "LocatonID", "Country");
             return View();
         }
 
@@ -53,7 +56,7 @@ namespace Saidality.Controllers
         // For more details, see http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public async Task<IActionResult> Create([Bind("PharmcyID,Name,Location,CreationDateTime,LastUpdateDateTime")] Pharmcy pharmcy)
+        public async Task<IActionResult> Create([Bind("PharmcyID,Name,LocatonID,CreationDateTime,LastUpdateDateTime")] Pharmcy pharmcy)
         {
             if (ModelState.IsValid)
             {
@@ -61,6 +64,7 @@ namespace Saidality.Controllers
                 await _context.SaveChangesAsync();
                 return RedirectToAction(nameof(Index));
             }
+            ViewData["LocatonID"] = new SelectList(_context.Locaton, "LocatonID", "Country", pharmcy.LocatonID);
             return View(pharmcy);
         }
 
@@ -77,6 +81,7 @@ namespace Saidality.Controllers
             {
                 return NotFound();
             }
+            ViewData["LocatonID"] = new SelectList(_context.Locaton, "LocatonID", "Country", pharmcy.LocatonID);
             return View(pharmcy);
         }
 
@@ -85,7 +90,7 @@ namespace Saidality.Controllers
         // For more details, see http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public async Task<IActionResult> Edit(int id, [Bind("PharmcyID,Name,Location,CreationDateTime,LastUpdateDateTime")] Pharmcy pharmcy)
+        public async Task<IActionResult> Edit(int id, [Bind("PharmcyID,Name,LocatonID,CreationDateTime,LastUpdateDateTime")] Pharmcy pharmcy)
         {
             if (id != pharmcy.PharmcyID)
             {
@@ -112,6 +117,7 @@ namespace Saidality.Controllers
                 }
                 return RedirectToAction(nameof(Index));
             }
+            ViewData["LocatonID"] = new SelectList(_context.Locaton, "LocatonID", "Country", pharmcy.LocatonID);
             return View(pharmcy);
         }
 
@@ -124,6 +130,7 @@ namespace Saidality.Controllers
             }
 
             var pharmcy = await _context.Pharmcies
+                .Include(p => p.Locaton)
                 .FirstOrDefaultAsync(m => m.PharmcyID == id);
             if (pharmcy == null)
             {

@@ -2,17 +2,15 @@
 using System;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
-using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 using Saidality.Models;
 
 namespace Saidality.Migrations
 {
     [DbContext(typeof(AppDbContext))]
-    [Migration("20210224001847_initialcreate")]
-    partial class initialcreate
+    partial class AppDbContextModelSnapshot : ModelSnapshot
     {
-        protected override void BuildTargetModel(ModelBuilder modelBuilder)
+        protected override void BuildModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder
@@ -371,11 +369,11 @@ namespace Saidality.Migrations
                     b.Property<DateTime?>("LastUpdateDateTime")
                         .HasColumnType("datetime(6)");
 
-                    b.Property<string>("Location")
-                        .IsRequired()
-                        .HasMaxLength(100)
-                        .HasColumnType("varchar(100) CHARACTER SET utf8mb4")
-                        .HasColumnName("Location");
+                    b.Property<int>("LocatonID")
+                        .HasColumnType("int");
+
+                    b.Property<int?>("MedicineID")
+                        .HasColumnType("int");
 
                     b.Property<string>("Name")
                         .IsRequired()
@@ -384,6 +382,10 @@ namespace Saidality.Migrations
                         .HasColumnName("Name");
 
                     b.HasKey("PharmcyID");
+
+                    b.HasIndex("LocatonID");
+
+                    b.HasIndex("MedicineID");
 
                     b.ToTable("Pharmcys");
                 });
@@ -484,7 +486,7 @@ namespace Saidality.Migrations
                         .HasForeignKey("LocatonID");
 
                     b.HasOne("Saidality.Models.Medicine", "Mediciene")
-                        .WithMany()
+                        .WithMany("Orders")
                         .HasForeignKey("MedicieneId")
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
@@ -513,10 +515,25 @@ namespace Saidality.Migrations
             modelBuilder.Entity("Saidality.Models.Person", b =>
                 {
                     b.HasOne("Saidality.Models.Locaton", "Locaton")
-                        .WithMany()
+                        .WithMany("Persons")
                         .HasForeignKey("LocatonId")
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
+
+                    b.Navigation("Locaton");
+                });
+
+            modelBuilder.Entity("Saidality.Models.Pharmcy", b =>
+                {
+                    b.HasOne("Saidality.Models.Locaton", "Locaton")
+                        .WithMany()
+                        .HasForeignKey("LocatonID")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
+
+                    b.HasOne("Saidality.Models.Medicine", null)
+                        .WithMany("Pharmcies")
+                        .HasForeignKey("MedicineID");
 
                     b.Navigation("Locaton");
                 });
@@ -543,6 +560,15 @@ namespace Saidality.Migrations
             modelBuilder.Entity("Saidality.Models.Locaton", b =>
                 {
                     b.Navigation("Orders");
+
+                    b.Navigation("Persons");
+                });
+
+            modelBuilder.Entity("Saidality.Models.Medicine", b =>
+                {
+                    b.Navigation("Orders");
+
+                    b.Navigation("Pharmcies");
                 });
 
             modelBuilder.Entity("Saidality.Models.Pharmcy", b =>

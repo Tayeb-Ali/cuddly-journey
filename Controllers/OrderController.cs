@@ -51,7 +51,7 @@ namespace Saidality.Controllers
         {
             ViewData["MedicieneId"] = new SelectList(_context.Medicines, "MedicineID", "BrandName");
             ViewData["PersonId"] = new SelectList(_context.Person, "PersonID", "Name");
-            ViewData["PharmacyId"] = new SelectList(_context.Pharmcies, "PharmcyID", "Location");
+            ViewData["PharmacyId"] = new SelectList(_context.Pharmcies, "PharmcyID", "Name");
             return View();
         }
 
@@ -70,7 +70,7 @@ namespace Saidality.Controllers
             }
             ViewData["MedicieneId"] = new SelectList(_context.Medicines, "MedicineID", "BrandName", order.MedicieneId);
             ViewData["PersonId"] = new SelectList(_context.Person, "PersonID", "Name", order.PersonId);
-            ViewData["PharmacyId"] = new SelectList(_context.Pharmcies, "PharmcyID", "Location", order.PharmacyId);
+            ViewData["PharmacyId"] = new SelectList(_context.Pharmcies, "PharmcyID", "Name", order.PharmacyId);
             return View(order);
         }
 
@@ -89,7 +89,7 @@ namespace Saidality.Controllers
             }
             ViewData["MedicieneId"] = new SelectList(_context.Medicines, "MedicineID", "BrandName", order.MedicieneId);
             ViewData["PersonId"] = new SelectList(_context.Person, "PersonID", "Name", order.PersonId);
-            ViewData["PharmacyId"] = new SelectList(_context.Pharmcies, "PharmcyID", "Location", order.PharmacyId);
+            ViewData["PharmacyId"] = new SelectList(_context.Pharmcies, "PharmcyID", "Name", order.PharmacyId);
             return View(order);
         }
 
@@ -127,7 +127,7 @@ namespace Saidality.Controllers
             }
             ViewData["MedicieneId"] = new SelectList(_context.Medicines, "MedicineID", "BrandName", order.MedicieneId);
             ViewData["PersonId"] = new SelectList(_context.Person, "PersonID", "Name", order.PersonId);
-            ViewData["PharmacyId"] = new SelectList(_context.Pharmcies, "PharmcyID", "Location", order.PharmacyId);
+            ViewData["PharmacyId"] = new SelectList(_context.Pharmcies, "PharmcyID", "Name", order.PharmacyId);
             return View(order);
         }
 

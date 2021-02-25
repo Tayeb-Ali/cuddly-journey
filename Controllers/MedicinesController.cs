@@ -9,22 +9,22 @@ using Saidality.Models;
 
 namespace Saidality.Controllers
 {
-    public class MedicineController : Controller
+    public class MedicinesController : Controller
     {
         private readonly AppDbContext _context;
 
-        public MedicineController(AppDbContext context)
+        public MedicinesController(AppDbContext context)
         {
             _context = context;
         }
 
-        // GET: Medicine
+        // GET: Medicines
         public async Task<IActionResult> Index()
         {
             return View(await _context.Medicines.ToListAsync());
         }
 
-        // GET: Medicine/Details/5
+        // GET: Medicines/Details/5
         public async Task<IActionResult> Details(int? id)
         {
             if (id == null)
@@ -42,13 +42,13 @@ namespace Saidality.Controllers
             return View(medicine);
         }
 
-        // GET: Medicine/Create
+        // GET: Medicines/Create
         public IActionResult Create()
         {
             return View();
         }
 
-        // POST: Medicine/Create
+        // POST: Medicines/Create
         // To protect from overposting attacks, enable the specific properties you want to bind to.
         // For more details, see http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
@@ -64,7 +64,7 @@ namespace Saidality.Controllers
             return View(medicine);
         }
 
-        // GET: Medicine/Edit/5
+        // GET: Medicines/Edit/5
         public async Task<IActionResult> Edit(int? id)
         {
             if (id == null)
@@ -80,7 +80,7 @@ namespace Saidality.Controllers
             return View(medicine);
         }
 
-        // POST: Medicine/Edit/5
+        // POST: Medicines/Edit/5
         // To protect from overposting attacks, enable the specific properties you want to bind to.
         // For more details, see http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
@@ -115,7 +115,7 @@ namespace Saidality.Controllers
             return View(medicine);
         }
 
-        // GET: Medicine/Delete/5
+        // GET: Medicines/Delete/5
         public async Task<IActionResult> Delete(int? id)
         {
             if (id == null)
@@ -133,7 +133,7 @@ namespace Saidality.Controllers
             return View(medicine);
         }
 
-        // POST: Medicine/Delete/5
+        // POST: Medicines/Delete/5
         [HttpPost, ActionName("Delete")]
         [ValidateAntiForgeryToken]
         public async Task<IActionResult> DeleteConfirmed(int id)
