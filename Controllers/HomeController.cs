@@ -36,20 +36,26 @@ namespace Saidality.Controllers
         [HttpPost]
         public async Task<IActionResult> Search(string BrandName, int LocatonID)
         {
-            var result = (from c in _auc.Medicines.Where(
-                s => s.BrandName.Contains(BrandName)|| s.ScientificName.Contains(BrandName)) select c).ToList();
+            //var result = (from c in _auc.Medicines.Where(
+            //    s => s.BrandName.Contains(BrandName) || s.ScientificName.Contains(BrandName))
+            //              select c).ToList();
 
-            //var entryPoint = (from ep in _auc.Locaton
-            //                  join e in _auc.Medicines on ep.LocatonID equals e.MedicineID
-            //                  where e.OwnerID == user.UID
-            //                  select new
-            //                  {
-            //                      UID = e.OwnerID,
-            //                      TID = e.TID,
-            //                      Title = t.Title,
-            //                      EID = e.EID
-            //                  }).Take(10);
-
+            var result = (from ep in _auc.Stocks
+                          join e in _auc.Locaton on ep.StockID equals e.LocatonID 
+                          join me in _auc.Medicines on ep.StockID equals me.MedicineID
+                          join ph in _auc.Pharmcies on ep.StockID equals ph.PharmcyID
+                          where e.LocatonID == LocatonID && ep.Mediciene.BrandName.Contains(BrandName) || ep.Mediciene.ScientificName.Contains(BrandName)
+                          select new
+                          {
+                              medicineID= ep.Mediciene.MedicineID,
+                              BrandName = ep.Mediciene.BrandName,
+                              ScientificName= ep.Mediciene.ScientificName,
+                              Type= ep.Mediciene.Type,
+                              price= ep.Mediciene.Price,
+                              pharmcies= ep.Pharmcy,
+                              State = e.State,
+                          }).Take(10);
+            //return Ok(result);
 
             if (result == null)
             {
