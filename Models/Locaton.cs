@@ -10,13 +10,7 @@ namespace Saidality.Models
     [Table("Locatons")]
     public class Locaton
     {
-        public Locaton()
-        {
-            Orders = new List<Order>();
-            Persons = new List<Person>();
-        }
-
-
+ 
         [Column("LocatonID")]
         [Key]
         [DatabaseGenerated(DatabaseGeneratedOption.Identity)]

@@ -70,9 +70,8 @@
                      @Html.DisplayFor(modelItem => item.Mediciene.CreationDateTime)
                 </td>
                 <td>
-                    <a href="/Order">New Order</a>
+                    <a href="/Order/Create">New Order</a>
                     <a href="/Order/@item.Mediciene.MedicineID">Order this</a>
-                    @*<a asp-action="Details" asp-route-id="@item.MedicineID">Details</a>*@ |
                 </td>
             </tr>
         }

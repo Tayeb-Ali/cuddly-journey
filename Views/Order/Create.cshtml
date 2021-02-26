@@ -21,19 +21,24 @@
                 <select asp-for="MedicieneId" class ="form-control" asp-items="ViewBag.MedicieneId"></select>
             </div>
             <div class="form-group">
-                <label asp-for="PersonId" class="control-label"></label>
-                <select asp-for="PersonId" class ="form-control" asp-items="ViewBag.PersonId"></select>
-            </div>
-            
-            <div class="form-group">
-                <label asp-for="LocatonID" class="control-label"></label>
-                <select asp-for="LocatonID" class ="form-control" asp-items="ViewBag.LocatonID"></select>
-            </div>
-
-            <div class="form-group">
                 <label asp-for="Price" class="control-label"></label>
                 <input asp-for="Price" class="form-control" />
                 <span asp-validation-for="Price" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="Address" class="control-label"></label>
+                <input asp-for="Address" class="form-control" />
+                <span asp-validation-for="Address" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="Name" class="control-label"></label>
+                <input asp-for="Name" class="form-control" />
+                <span asp-validation-for="Name" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="ContactNumber" class="control-label"></label>
+                <input asp-for="ContactNumber" class="form-control" />
+                <span asp-validation-for="ContactNumber" class="text-danger"></span>
             </div>
             <div class="form-group">
                 <label asp-for="CreationDateTime" class="control-label"></label>

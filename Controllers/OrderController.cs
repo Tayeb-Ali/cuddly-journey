@@ -21,7 +21,7 @@ namespace Saidality.Controllers
         // GET: Order
         public async Task<IActionResult> Index()
         {
-            var appDbContext = _context.Order.Include(o => o.Mediciene).Include(o => o.Person).Include(o => o.Pharmcy).Include(o => o.Locaton);
+            var appDbContext = _context.Order.Include(o => o.Mediciene).Include(o => o.Pharmcy);
             return View(await appDbContext.ToListAsync());
         }
 
@@ -35,7 +35,6 @@ namespace Saidality.Controllers
 
             var order = await _context.Order
                 .Include(o => o.Mediciene)
-                .Include(o => o.Person)
                 .Include(o => o.Pharmcy)
                 .FirstOrDefaultAsync(m => m.OrderID == id);
             if (order == null)
@@ -50,9 +49,7 @@ namespace Saidality.Controllers
         public IActionResult Create()
         {
             ViewData["MedicieneId"] = new SelectList(_context.Medicines, "MedicineID", "BrandName");
-            ViewData["PersonId"] = new SelectList(_context.Person, "PersonID", "Name");
             ViewData["PharmacyId"] = new SelectList(_context.Pharmcies, "PharmcyID", "Name");
-            ViewData["LocatonID"] = new SelectList(_context.Locaton, "LocatonID", "State");
             return View();
         }
 
@@ -61,7 +58,7 @@ namespace Saidality.Controllers
         // For more details, see http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public async Task<IActionResult> Create([Bind("OrderID,PharmacyId,MedicieneId,PersonId,Location,Price,CreationDateTime,LastUpdateDateTime")] Order order)
+        public async Task<IActionResult> Create([Bind("OrderID,PharmacyId,MedicieneId,Price,Address,Name,ContactNumber,CreationDateTime,LastUpdateDateTime")] Order order)
         {
             if (ModelState.IsValid)
             {
@@ -70,10 +67,7 @@ namespace Saidality.Controllers
                 return RedirectToAction(nameof(Index));
             }
             ViewData["MedicieneId"] = new SelectList(_context.Medicines, "MedicineID", "BrandName", order.MedicieneId);
-            ViewData["PersonId"] = new SelectList(_context.Person, "PersonID", "Name", order.PersonId);
             ViewData["PharmacyId"] = new SelectList(_context.Pharmcies, "PharmcyID", "Name", order.PharmacyId);
-            ViewData["LocatonID"] = new SelectList(_context.Locaton, "LocatonID", "State", order.LocatonID);
-
             return View(order);
         }
 
@@ -91,10 +85,7 @@ namespace Saidality.Controllers
                 return NotFound();
             }
             ViewData["MedicieneId"] = new SelectList(_context.Medicines, "MedicineID", "BrandName", order.MedicieneId);
-            ViewData["PersonId"] = new SelectList(_context.Person, "PersonID", "Name", order.PersonId);
             ViewData["PharmacyId"] = new SelectList(_context.Pharmcies, "PharmcyID", "Name", order.PharmacyId);
-            ViewData["LocatonID"] = new SelectList(_context.Locaton, "LocatonID", "State");
-
             return View(order);
         }
 
@@ -103,7 +94,7 @@ namespace Saidality.Controllers
         // For more details, see http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public async Task<IActionResult> Edit(int id, [Bind("OrderID,PharmacyId,MedicieneId,PersonId,Location,Price,CreationDateTime,LastUpdateDateTime")] Order order)
+        public async Task<IActionResult> Edit(int id, [Bind("OrderID,PharmacyId,MedicieneId,Price,Address,Name,ContactNumber,CreationDateTime,LastUpdateDateTime")] Order order)
         {
             if (id != order.OrderID)
             {
@@ -131,10 +122,7 @@ namespace Saidality.Controllers
                 return RedirectToAction(nameof(Index));
             }
             ViewData["MedicieneId"] = new SelectList(_context.Medicines, "MedicineID", "BrandName", order.MedicieneId);
-            ViewData["PersonId"] = new SelectList(_context.Person, "PersonID", "Name", order.PersonId);
             ViewData["PharmacyId"] = new SelectList(_context.Pharmcies, "PharmcyID", "Name", order.PharmacyId);
-            ViewData["LocatonID"] = new SelectList(_context.Locaton, "LocatonID", "State", order.LocatonID);
-
             return View(order);
         }
 
@@ -148,9 +136,7 @@ namespace Saidality.Controllers
 
             var order = await _context.Order
                 .Include(o => o.Mediciene)
-                .Include(o => o.Person)
                 .Include(o => o.Pharmcy)
-                .Include(o => o.Locaton)
                 .FirstOrDefaultAsync(m => m.OrderID == id);
             if (order == null)
             {

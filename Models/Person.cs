@@ -24,20 +24,12 @@ namespace Saidality.Models
         [StringLength(100)]
         public string Name { get; set; }
 
-        //[Column("Locaton")]
-        //[Display(Name = "Locaton")]
-        //[StringLength(100)]
-        //public string Locaton { get; set; }
-
         [ForeignKey("AspnetUsers")]
         public string UserId { get; set; }
         
         [ForeignKey("Locaton")]
         [Display(Name = "Select Locaton")]
         public int LocatonId { get; set; }
-
-
-        //public User User { get; set; }
 
         public Locaton Locaton { get; set; }
     }
