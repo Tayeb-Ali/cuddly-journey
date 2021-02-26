@@ -8,13 +8,7 @@ namespace Saidality.Models
     [Table("Pharmcys")]
     public class Pharmcy
     {
-        public Pharmcy()
-        {
-            Stocks = new List<Stock>();
-            Medicines = new List<Medicine>();
-            Locaton = new Locaton();
-        }
-
+   
         [Column("PharmcyID")]
         [Key]
         [DatabaseGenerated(DatabaseGeneratedOption.Identity)]

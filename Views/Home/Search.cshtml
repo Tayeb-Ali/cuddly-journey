@@ -24,10 +24,13 @@
                 Type
             </th>
             <th>
-                Pharmcy
+                Price
             </th>
             <th>
-                Price
+                Pharmacy Name
+            </th>
+            <th>
+                Pharmcy Locaton
             </th>
             <th>
                 CreationDateTime
@@ -43,26 +46,28 @@
         {
             <tr>
                 <td>
-                    @Html.DisplayNameFor(model => model.Mediciene.BrandName)
+                    @Html.DisplayFor(modelItem => item.Mediciene.BrandName)
                 </td>
                 <td>
-                    @Html.DisplayNameFor(model => model.Mediciene.ScientificName)
+                     @Html.DisplayFor(modelItem => item.Mediciene.ScientificName)
                 </td>
                 <td>
-                    @Html.DisplayNameFor(model => model.Mediciene.Type)
+                     @Html.DisplayFor(modelItem => item.Mediciene.Type)
                 </td>
                 <td>
-                    @Html.DisplayNameFor(model => model.Pharmcy.Name): Locaton-@Html.DisplayNameFor(model => model.Pharmcy.Locaton.State)
-
+                     @Html.DisplayFor(modelItem => item.Mediciene.Price)
                 </td>
                 <td>
-                    @Html.DisplayNameFor(model => model.Mediciene.Price)
+                     @Html.DisplayFor(modelItem => item.Pharmcy.Name)
+                </td> 
+                <td>
+                     @Html.DisplayFor(modelItem => item.Pharmcy.Locaton.State)
                 </td>
                 <td>
-                    @Html.DisplayNameFor(model => model.Mediciene.CreationDateTime)
+                     @Html.DisplayFor(modelItem => item.Mediciene.CreationDateTime)
                 </td>
                 <td>
-                    @Html.DisplayNameFor(model => model.Mediciene.LastUpdateDateTime)
+                     @Html.DisplayFor(modelItem => item.Mediciene.CreationDateTime)
                 </td>
                 <td>
                     <a href="/Order">Order</a> |

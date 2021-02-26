@@ -1,8 +1,6 @@
 ﻿using Microsoft.AspNetCore.Mvc;
-using Microsoft.Extensions.Logging;
+using Microsoft.EntityFrameworkCore;
 using Saidality.Models;
-using Saidality.ViewModel;
-using System;
 using System.Collections.Generic;
 using System.Diagnostics;
 using System.Linq;
@@ -12,19 +10,17 @@ namespace Saidality.Controllers
 {
     public class HomeController : Controller
     {
-        private readonly ILogger<HomeController> _logger;
-        private readonly AppDbContext _auc;
+        private readonly AppDbContext _context;
 
-        public HomeController(ILogger<HomeController> logger, AppDbContext aus)
+        public HomeController( AppDbContext context)
         {
-            _logger = logger;
-            _auc = aus;
+            _context = context;
         }
 
         public IActionResult Index()
         {
             List<Locaton> cl = new List<Locaton>();
-            cl = (from c in _auc.Locaton select c).ToList();
+            cl = (from c in _context.Locaton select c).ToList();
             cl.Insert(0, new Locaton { LocatonID = 0, State = "--Select State--" });
             ViewBag.message = cl;
             return View();
@@ -33,11 +29,12 @@ namespace Saidality.Controllers
         [HttpPost]
         public async Task<IActionResult> Search(string BrandName, int LocatonID)
         {
-            var result = (from c in _auc.Stocks.Where(
+            var result = (from c in _context.Stocks.Where(
                 s => s.Mediciene.BrandName.Contains(BrandName) || s.Mediciene.ScientificName.Contains(BrandName))
-                          select c).ToList();
+                          select c)
+                          .Include(s => s.Mediciene).Include(s => s.Pharmcy).Include(s=> s.Pharmcy.Locaton);
 
-            //return Ok(result.ToList());
+            //return Ok(result);
             if (result == null)
             {
                 return NotFound();
@@ -48,7 +45,7 @@ namespace Saidality.Controllers
             //};
 
             //viewModel.Medicines = (IEnumerable<Medicine>)result;
-            return View(result);
+            return View(await result.ToListAsync());
         }
             
         

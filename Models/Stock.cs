@@ -1,20 +1,12 @@
 ﻿using System;
-using System.Collections.Generic;
 using System.ComponentModel.DataAnnotations;
 using System.ComponentModel.DataAnnotations.Schema;
-using System.Linq;
-using System.Threading.Tasks;
 
 namespace Saidality.Models
 {
     [Table("Stocks")]
     public class Stock
     {
-        public Stock()
-        {
-            Pharmcy = new Pharmcy();
-            Mediciene = new Medicine();
-        }
         [Column("StockID")]
         [Key]
         [DatabaseGenerated(DatabaseGeneratedOption.Identity)]
