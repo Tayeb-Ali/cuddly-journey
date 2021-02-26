@@ -30,21 +30,14 @@ namespace Saidality.Controllers
         public async Task<IActionResult> Search(string BrandName, int LocatonID)
         {
             var result = (from c in _context.Stocks.Where(
-                s => s.Mediciene.BrandName.Contains(BrandName) || s.Mediciene.ScientificName.Contains(BrandName))
+                s => s.Mediciene.BrandName.Contains(BrandName) || s.Mediciene.ScientificName.Contains(BrandName) && s.Pharmcy.Locaton.LocatonID == LocatonID)
                           select c)
                           .Include(s => s.Mediciene).Include(s => s.Pharmcy).Include(s=> s.Pharmcy.Locaton);
 
-            //return Ok(result);
             if (result == null)
             {
                 return NotFound();
             }
-            //var viewModel = new HomeViewModel {
-            //    Mediciene = result.ToList(),
-            //    Pharmcy = result.ToList()
-            //};
-
-            //viewModel.Medicines = (IEnumerable<Medicine>)result;
             return View(await result.ToListAsync());
         }
             

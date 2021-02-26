@@ -6,7 +6,7 @@
     ViewData["Title"] = "Index";
 }
 
-<h1>Index</h1>
+<h1>Result</h1>
 
 <p>
     <a asp-action="Create">Create New</a>
@@ -70,7 +70,8 @@
                      @Html.DisplayFor(modelItem => item.Mediciene.CreationDateTime)
                 </td>
                 <td>
-                    <a href="/Order">Order</a> |
+                    <a href="/Order">New Order</a>
+                    <a href="/Order/@item.Mediciene.MedicineID">Order this</a>
                     @*<a asp-action="Details" asp-route-id="@item.MedicineID">Details</a>*@ |
                 </td>
             </tr>
