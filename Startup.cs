@@ -28,7 +28,15 @@ namespace Saidality
             //string mySqlConnectionStr = Configuration.GetConnectionString("DefaultConnection");
             string mySqlConnectionStr = "server=localhost;port=3306;database=PharmacyDb;user=root;password=''";
             services.AddDbContextPool<AppDbContext>(options => options.UseMySql(mySqlConnectionStr, ServerVersion.AutoDetect(mySqlConnectionStr)));
-            services.AddIdentity<IdentityUser, IdentityRole>();
+            services.AddIdentity<IdentityUser, IdentityRole>(opation=> {
+                opation.Password.RequiredLength = 6;
+                opation.Password.RequireDigit = false;
+                opation.Password.RequireLowercase = false;
+                opation.Password.RequireNonAlphanumeric = false;
+                opation.Password.RequireUppercase = false;
+            }).AddEntityFrameworkStores<AppDbContext>();
+
+            //services.AddIdentity<IdentityUser, IdentityRole>();
             //    opation =>
             //{
             //    opation.Password.RequiredLength = 6;

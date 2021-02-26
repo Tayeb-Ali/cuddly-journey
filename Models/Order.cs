@@ -33,7 +33,7 @@ namespace Saidality.Models
         //public int LocatonID { get; set; }
 
         [Column("Price")]
-        public double Price { get; set; }
+        public double? Price { get; set; }
 
         [Column("Address")]
         [Display(Name = "Enter your Address")]

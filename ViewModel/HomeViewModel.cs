@@ -10,8 +10,10 @@ namespace Saidality.ViewModel
     {
         public List<Medicine> Mediciene { get; set; }
         //public Medicine GetMedicines { get; set; }
+        public Order Order { get; set; }
         public Locaton Locaton { get; set; }
-        public List<Pharmcy> Pharmcy { get; set; }
+        public Pharmcy Pharmcy { get; set; }
+        public Medicine Medicine { get; set; }
 
         //public IEnumerable<Medicine> Medicines { get; set; }
         //public IEnumerable<Locaton> Locatons { get; set; }

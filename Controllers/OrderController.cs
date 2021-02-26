@@ -88,6 +88,21 @@ namespace Saidality.Controllers
             ViewData["PharmacyId"] = new SelectList(_context.Pharmcies, "PharmcyID", "Name", order.PharmacyId);
             return View(order);
         }
+        
+        
+        [Route("Order/New/{medId}/{PhrId}")]
+        public async Task<IActionResult> Mediciene(int? medId, int? PhrId)
+        {
+            var mediciene = await _context.Medicines.Include(s => s.Pharmcies).Where(s => s.MedicineID == medId).FirstAsync();
+            var pharmcy = await _context.Pharmcies.FindAsync(PhrId);
+            if (mediciene == null)
+            {
+                return NotFound();
+            }
+            ViewData["MedicieneId"] = new SelectList(_context.Medicines, "MedicineID", "BrandName", mediciene.MedicineID);
+            ViewData["PharmacyId"] = new SelectList(_context.Pharmcies, "PharmcyID", "Name", pharmcy.PharmcyID);
+            return View(mediciene);
+        }
 
         // POST: Order/Edit/5
         // To protect from overposting attacks, enable the specific properties you want to bind to.
@@ -125,7 +140,8 @@ namespace Saidality.Controllers
             ViewData["PharmacyId"] = new SelectList(_context.Pharmcies, "PharmcyID", "Name", order.PharmacyId);
             return View(order);
         }
-
+        
+        
         // GET: Order/Delete/5
         public async Task<IActionResult> Delete(int? id)
         {

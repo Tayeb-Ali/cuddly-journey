@@ -47,7 +47,7 @@ namespace Saidality.Controllers
         // GET: Pharmcy/Create
         public IActionResult Create()
         {
-            ViewData["LocatonID"] = new SelectList(_context.Locaton, "LocatonID", "Country");
+            ViewData["LocatonID"] = new SelectList(_context.Locaton, "LocatonID", "State");
             return View();
         }
 
@@ -64,7 +64,7 @@ namespace Saidality.Controllers
                 await _context.SaveChangesAsync();
                 return RedirectToAction(nameof(Index));
             }
-            ViewData["LocatonID"] = new SelectList(_context.Locaton, "LocatonID", "Country", pharmcy.LocatonID);
+            ViewData["LocatonID"] = new SelectList(_context.Locaton, "LocatonID", "State", pharmcy.LocatonID);
             return View(pharmcy);
         }
 
@@ -81,7 +81,7 @@ namespace Saidality.Controllers
             {
                 return NotFound();
             }
-            ViewData["LocatonID"] = new SelectList(_context.Locaton, "LocatonID", "Country", pharmcy.LocatonID);
+            ViewData["LocatonID"] = new SelectList(_context.Locaton, "LocatonID", "State", pharmcy.LocatonID);
             return View(pharmcy);
         }
 
@@ -117,7 +117,7 @@ namespace Saidality.Controllers
                 }
                 return RedirectToAction(nameof(Index));
             }
-            ViewData["LocatonID"] = new SelectList(_context.Locaton, "LocatonID", "Country", pharmcy.LocatonID);
+            ViewData["LocatonID"] = new SelectList(_context.Locaton, "LocatonID", "State", pharmcy.LocatonID);
             return View(pharmcy);
         }
 
