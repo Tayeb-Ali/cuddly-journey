@@ -101,7 +101,8 @@ namespace Saidality.Controllers
             }
             ViewData["MedicieneId"] = new SelectList(_context.Medicines, "MedicineID", "BrandName", mediciene.MedicineID);
             ViewData["PharmacyId"] = new SelectList(_context.Pharmcies, "PharmcyID", "Name", pharmcy.PharmcyID);
-            return View(mediciene);
+            ViewData["Price"] = mediciene.Price;
+            return View();
         }
 
         // POST: Order/Edit/5

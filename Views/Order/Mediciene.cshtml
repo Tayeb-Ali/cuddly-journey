@@ -1,5 +1,5 @@
-﻿@*@model Saidality.Models.Order*@
-@model Saidality.ViewModel.HomeViewModel
+﻿@model Saidality.Models.Order
+@*@model Saidality.ViewModel.HomeViewModel*@
 
 @{
     ViewData["Title"] = "Create";
@@ -14,42 +14,42 @@
         <form asp-action="Create">
             <div asp-validation-summary="ModelOnly" class="text-danger"></div>
             <div class="form-group">
-                <label asp-for="Order.PharmacyId" class="control-label"></label>
-                <select asp-for="Order.PharmacyId" class ="form-control" asp-items="ViewBag.PharmacyId"></select>
+                <label asp-for="PharmacyId" class="control-label"></label>
+                <select asp-for="PharmacyId" disabled class ="form-control" asp-items="ViewBag.PharmacyId"></select>
             </div>
             <div class="form-group">
-                <label asp-for="Order.MedicieneId" class="control-label"></label>
-                <select asp-for="Order.MedicieneId" class ="form-control" asp-items="ViewBag.MedicieneId"></select>
+                <label asp-for="MedicieneId" class="control-label"></label>
+                <select asp-for="MedicieneId" disabled class ="form-control" asp-items="ViewBag.MedicieneId"></select>
             </div>
             <div class="form-group">
-                <label asp-for="Order.Price" class="control-label"></label>
-                <input asp-for="Order.Price" class="form-control" />
-                <span asp-validation-for="Order.Price" class="text-danger"></span>
+                <label asp-for="Price" class="control-label"></label>
+                <input asp-for="Price" class="form-control" />
+                <span asp-validation-for="Price" disabled asp-items="ViewBag.Price" class="text-danger"></span>
             </div>
             <div class="form-group">
-                <label asp-for="Order.Address" class="control-label"></label>
-                <input asp-for="Order.Address" class="form-control" />
-                <span asp-validation-for="Order.Address" class="text-danger"></span>
+                <label asp-for="Address" class="control-label"></label>
+                <input asp-for="Address" class="form-control" />
+                <span asp-validation-for="Address" class="text-danger"></span>
             </div>
             <div class="form-group">
-                <label asp-for="Order.Name" class="control-label"></label>
-                <input asp-for="Order.Name" class="form-control" />
-                <span asp-validation-for="Order.Name" class="text-danger"></span>
+                <label asp-for="Name" class="control-label"></label>
+                <input asp-for="Name" class="form-control" />
+                <span asp-validation-for="Name" class="text-danger"></span>
             </div>
             <div class="form-group">
-                <label asp-for="Order.ContactNumber" class="control-label"></label>
-                <input asp-for="Order.ContactNumber" class="form-control" />
-                <span asp-validation-for="Order.ContactNumber" class="text-danger"></span>
+                <label asp-for="ContactNumber" class="control-label"></label>
+                <input asp-for="ContactNumber" class="form-control" />
+                <span asp-validation-for="ContactNumber" class="text-danger"></span>
             </div>
             <div class="form-group">
-                <label asp-for="Order.CreationDateTime" class="control-label"></label>
-                <input asp-for="Order.CreationDateTime" class="form-control" />
-                <span asp-validation-for="Order.CreationDateTime" class="text-danger"></span>
+                <label asp-for="CreationDateTime" class="control-label"></label>
+                <input asp-for="CreationDateTime" class="form-control" />
+                <span asp-validation-for="CreationDateTime" class="text-danger"></span>
             </div>
             <div class="form-group">
-                <label asp-for="Order.LastUpdateDateTime" class="control-label"></label>
-                <input asp-for="Order.LastUpdateDateTime" class="form-control" />
-                <span asp-validation-for="Order.LastUpdateDateTime" class="text-danger"></span>
+                <label asp-for="LastUpdateDateTime" class="control-label"></label>
+                <input asp-for="LastUpdateDateTime" class="form-control" />
+                <span asp-validation-for="LastUpdateDateTime" class="text-danger"></span>
             </div>
             <div class="form-group">
                 <input type="submit" value="Create" class="btn btn-primary" />
